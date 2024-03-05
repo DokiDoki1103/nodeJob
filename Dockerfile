@@ -3,12 +3,12 @@ WORKDIR /app
 
 COPY . .
 
-RUN go build -o app .
+RUN go build -o nodeJob .
 
 FROM alpine:latest
 
-WORKDIR /root/
+WORKDIR /app
 
-COPY --from=builder /app/app .
+COPY --from=builder /app/nodeJob /app/nodeJob
 
-CMD ["./app"]
+CMD ["/app/nodeJob"]

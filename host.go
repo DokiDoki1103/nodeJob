@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"io"
+	"log"
 	"os"
 	"strings"
 )
@@ -18,6 +19,7 @@ const (
 
 // WriteHosts set rainbond imagehub and ip to local host file
 func WriteHosts(hostspath, ip string) error {
+	log.Println("write:", hostspath, ip)
 	// open hostfile in operator
 	hostFile, err := os.OpenFile(hostspath, os.O_RDWR|os.O_APPEND, 0777)
 	if err != nil {
@@ -33,9 +35,11 @@ func WriteHosts(hostspath, ip string) error {
 			return err
 		}
 		if err == io.EOF {
+			log.Println("io EOF")
 			break
 		}
 		if line == StartOfSection {
+			log.Println("have StartOfSection")
 			return nil
 		}
 	}
@@ -52,6 +56,5 @@ func WriteHosts(hostspath, ip string) error {
 			return err
 		}
 	}
-	writer.Flush()
-	return nil
+	return writer.Flush()
 }

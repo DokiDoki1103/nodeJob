@@ -35,11 +35,9 @@ func WriteHosts(hostspath, ip string) error {
 			return err
 		}
 		if err == io.EOF {
-			log.Println("io EOF")
 			break
 		}
 		if line == StartOfSection {
-			log.Println("have StartOfSection")
 			return nil
 		}
 	}

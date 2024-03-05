@@ -25,7 +25,7 @@ func main() {
 		log.Fatalf("get pod error %v", err)
 	}
 
-	err = WriteHosts("/etc/hosts", pods.Items[0].Status.PodIP)
+	err = WriteHosts("/newetc/hosts", pods.Items[0].Status.PodIP)
 	if err != nil {
 		log.Fatalf("write host error %v", err)
 	}

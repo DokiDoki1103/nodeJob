@@ -1,6 +1,6 @@
 module github.com/DokiDoki1103/nodeJob
 
-go 1.21.0
+go 1.23
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect

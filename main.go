@@ -33,4 +33,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("sync docker cert from secret error %v", err)
 	}
+	log.Println("all job success")
 }

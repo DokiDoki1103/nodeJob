@@ -1,14 +1,17 @@
 FROM golang:1.21.0 AS builder
+
 WORKDIR /app
 
 COPY . .
 
-RUN go build -o nodeJob .
+ENV GO111MODULE=on \
+    CGO_ENABLED=0 \
+    GOOS=linux
 
-FROM alpine:latest
+RUN go build -ldflags "-s -w -extldflags '-static'" -o nodeJob
 
-WORKDIR /app
+FROM alpine
 
-COPY --from=builder /app/nodeJob /app/nodeJob
+COPY --from=builder /app/nodeJob /
 
-CMD ["/app/nodeJob"]
+CMD ["/nodeJob"]

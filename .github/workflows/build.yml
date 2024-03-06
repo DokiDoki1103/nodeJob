@@ -22,19 +22,21 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
+      - name: Login to Ali Docker
+        uses: docker/login-action@v3
         with:
+          registry: registry.cn-hangzhou.aliyuncs.com
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
 
       - name: Build and Push Multi-arch Docker Image
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           context: .
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/node-job:latest
-            ${{ secrets.DOCKER_USERNAME }}/node-job:v${{ github.run_number }}
+            registry.cn-hangzhou.aliyuncs.com/goodrain/node-job:latest
+            registry.cn-hangzhou.aliyuncs.com/goodrain/node-job:v${{ github.run_number }}

@@ -6,7 +6,6 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"log"
 	ctrl "sigs.k8s.io/controller-runtime"
-	"time"
 )
 
 const NameSpace = "rbd-system"
@@ -35,6 +34,4 @@ func main() {
 		log.Fatalf("sync docker cert from secret error %v", err)
 	}
 	log.Println("all job success")
-
-	time.Sleep(time.Hour * 1)
 }
